@@ -1,6 +1,13 @@
 # Koine::SqlBuilder
 
-Sql builder
+SQL builder
+
+[![Build Status](https://travis-ci.org/mjacobus/koine-sql_builder.svg?branch=master)](https://travis-ci.org/mjacobus/koine-sql_builder)
+[![Coverage Status](https://coveralls.io/repos/github/mjacobus/koine-sql_builder/badge.svg?branch=master)](https://coveralls.io/github/mjacobus/koine-sql_builder?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/eb8b4ea26c2110d67732/maintainability)](https://codeclimate.com/github/mjacobus/koine-sql_builder/maintainability)
+[![Issue Count](https://codeclimate.com/github/mjacobus/koine-sql_builder/badges/issue_count.svg)](https://codeclimate.com/github/mjacobus/koine-sql_builder)
+
+[![Gem Version](https://badge.fury.io/rb/koine-sql_builder.svg)](https://badge.fury.io/rb/koine-sql_builder)
 
 ## Installation
 
