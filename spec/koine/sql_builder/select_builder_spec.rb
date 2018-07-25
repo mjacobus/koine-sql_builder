@@ -44,5 +44,15 @@ RSpec.describe Koine::SqlBuilder::SelectBuilder do
 
       expect(sql).to eq('SELECT foo FROM bar WHERE foo = "bar2" AND bar = 1')
     end
+
+    it 'returns SQL with as condition classes' do
+      builder = subject.select(:foo).from(:bar)
+
+      sql = immutable(builder) do |b|
+        b.where(adapter.equal(:foo, nil).not)
+      end.to_s
+
+      expect(sql).to eq('SELECT foo FROM bar WHERE foo IS NOT NULL')
+    end
   end
 end

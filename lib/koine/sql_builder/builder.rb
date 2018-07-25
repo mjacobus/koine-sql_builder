@@ -3,6 +3,12 @@
 module Koine
   module SqlBuilder
     class Builder
+      attr_reader :adapter
+
+      def initialize(adapter: Adapter.new)
+        @adapter = adapter
+      end
+
       def select(*args)
         SelectBuilder.new(
           adapter: adapter,
@@ -10,12 +16,6 @@ module Koine
           from: From.new,
           where: WhereBag.new(adapter: adapter)
         )
-      end
-
-      private
-
-      def adapter
-        @adapter ||= Adapter.new
       end
     end
   end

@@ -7,8 +7,10 @@ module Koine
 
       INTEGER_REGEXP = /^\d+$/
 
-      def joiner
-        "\s"
+      attr_reader :joiner
+
+      def initialize(joiner: "\s")
+        @joiner = joiner
       end
 
       def create_condition(item)
