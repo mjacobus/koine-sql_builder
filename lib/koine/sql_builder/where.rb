@@ -25,7 +25,7 @@ module Koine
 
       def to_s
         unless items.empty?
-          return "WHERE #{items.join(' AND ')}"
+          return "WHERE #{to_a.join(' AND ')}"
         end
 
         ''
