@@ -58,7 +58,16 @@ RSpec.describe Koine::SqlBuilder::Adapter do
       )
     end
 
-    it 'deals with condition' do
+    it 'raises when type of item is not recognized' do
+      expect do
+        adapter.create_condition('string')
+      end.to raise_error(
+        Koine::SqlBuilder::Adapter::ArgumentError,
+        'Unrecognized condition "string"'
+      )
+    end
+
+    it 'deals with formatted Condition' do
       condition = adapter.create_condition(sample_condition)
 
       expect(condition).to be(sample_condition)

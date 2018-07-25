@@ -26,7 +26,7 @@ module Koine
           return item
         end
 
-        raise "oops #{item.class}"
+        raise ArgumentError, "Unrecognized condition #{item.inspect}"
       end
 
       def equal(field, value)
