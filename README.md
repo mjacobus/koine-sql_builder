@@ -1,6 +1,9 @@
 # Koine::SqlBuilder
 
-SQL builder
+Simple SQL builder created with MySql in mind - although I will try to make it compatible with other SQL based databases.
+A port to other databases can potentially be achieved by replacing the adapter.
+
+**This is a WIP**
 
 [![Build Status](https://travis-ci.org/mjacobus/koine-sql_builder.svg?branch=master)](https://travis-ci.org/mjacobus/koine-sql_builder)
 [![Coverage Status](https://coveralls.io/repos/github/mjacobus/koine-sql_builder/badge.svg?branch=master)](https://coveralls.io/github/mjacobus/koine-sql_builder?branch=master)
