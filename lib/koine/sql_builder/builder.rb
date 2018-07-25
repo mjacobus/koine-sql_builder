@@ -14,6 +14,7 @@ module Koine
           adapter: adapter,
           select: Select.new(*args),
           from: From.new,
+          joins: Joins.new(adapter: adapter),
           where: Where.new(adapter: adapter)
         )
       end

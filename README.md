@@ -72,6 +72,24 @@ builder
 # SELECT *
 # FROM users
 # WHERE age IS NOT NULL
+
+builder
+  .select
+  .from(:users)
+  .join(:articles).on('users.id = articles.user_id')
+
+# SELECT *
+# FROM users
+# INNER JOIN articles ON users.id = articles.user_id
+
+builder
+  .select
+  .from(:users)
+  .join(:articles, :a).on('users.id = a.user_id')
+
+# SELECT *
+# FROM users
+# INNER JOIN articles a ON users.id = a.user_id
 ```
 
 ## Development

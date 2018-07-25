@@ -51,4 +51,30 @@ examples.add do |builder|
   # WHERE age IS NOT NULL
 end
 
+examples.add do |builder|
+  builder
+    .select
+    .from(:users)
+    .join(:articles).on('users.id = articles.user_id')
+
+  # SELECT *
+  # FROM users
+  # INNER JOIN articles ON users.id = articles.user_id
+end
+
+examples.add do |builder|
+  builder
+    .select
+    .from(:users)
+    .join(:articles, :a).on('users.id = a.user_id')
+
+  # SELECT *
+  # FROM users
+  # INNER JOIN articles a ON users.id = a.user_id
+end
+
+puts
+puts
 puts examples.to_a.join("\n\n")
+puts
+puts

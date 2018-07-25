@@ -16,8 +16,13 @@ RSpec.describe Koine::SqlBuilder::Conditions::Comparison do
   end
 
   describe '#not' do
-    let(:comparison)     { Koine::SqlBuilder::Conditions::Equal.new(:foo, :bar, adapter: adapter) }
-    let(:not_comparison) { Koine::SqlBuilder::Conditions::NotEqual.new(:foo, :bar, adapter: adapter) }
+    let(:comparison) do
+      Koine::SqlBuilder::Conditions::Equal.new(:foo, :bar, adapter: adapter)
+    end
+
+    let(:not_comparison) do
+      Koine::SqlBuilder::Conditions::NotEqual.new(:foo, :bar, adapter: adapter)
+    end
 
     describe 'when it is comparison' do
       it 'returns the Not version' do

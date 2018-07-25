@@ -31,4 +31,3 @@ RSpec.describe Koine::SqlBuilder::Conditions::NotEqual do
     end
   end
 end
-
