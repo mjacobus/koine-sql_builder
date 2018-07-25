@@ -4,7 +4,7 @@ module Koine
   module SqlBuilder
     class Condition
       def to_s
-        raise 'not implemented'
+        raise NotImplementedError
       end
     end
   end
