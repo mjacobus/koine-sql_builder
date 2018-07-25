@@ -14,4 +14,34 @@ RSpec.describe Koine::SqlBuilder::Conditions::Comparison do
   it 'raises an error when #to_s is called' do
     expect { subject.to_s }.to raise_error(NotImplementedError)
   end
+
+  describe '#not' do
+    let(:comparison)     { Koine::SqlBuilder::Conditions::Equal.new(:foo, :bar, adapter: adapter) }
+    let(:not_comparison) { Koine::SqlBuilder::Conditions::NotEqual.new(:foo, :bar, adapter: adapter) }
+
+    describe 'when it is comparison' do
+      it 'returns the Not version' do
+        expect(comparison.not).to be_equal_to(not_comparison)
+      end
+    end
+
+    describe 'when it is not_comparison' do
+      it 'returns the Not version' do
+        expect(not_comparison.not).to be_equal_to(comparison)
+      end
+    end
+
+    describe 'when class negation does not exist' do
+      before do
+        allow(comparison).to receive(:class).and_return('Foo')
+      end
+
+      it 'raises error' do
+        expect { comparison.not }.to raise_error(
+          NotImplementedError,
+          'Comparison class NotFoo is not defined'
+        )
+      end
+    end
+  end
 end

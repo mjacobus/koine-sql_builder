@@ -10,6 +10,10 @@ module Koine
           @value = value.dup
         end
 
+        def not
+          not_class.new(field, value, adapter: adapter)
+        end
+
         private
 
         attr_reader :field
@@ -18,6 +22,19 @@ module Koine
 
         def nil?
           @value.nil?
+        end
+
+        def not_class
+          parts = self.class.to_s.split('::')
+          last = parts.pop
+          last = "Not#{last}".sub('NotNot', '')
+          klass = parts.push(last).join('::')
+
+          if Object.const_defined?(klass)
+            return Object.const_get(klass)
+          end
+
+          raise NotImplementedError, "Comparison class #{klass} is not defined"
         end
       end
     end
