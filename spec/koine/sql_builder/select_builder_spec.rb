@@ -55,4 +55,40 @@ RSpec.describe Koine::SqlBuilder::SelectBuilder do
       expect(sql).to eq('SELECT foo FROM bar WHERE foo IS NOT NULL')
     end
   end
+
+  # join(:users, :u).on(u: :id, other: :user_id)
+  describe '#join' do
+    let(:query) { builder.from(:foo) }
+
+    it 'joins table' do
+      sql = immutable(query) do
+        query.join(:articles)
+      end
+
+      expect(sql.to_s).to eq('SELECT * FROM foo INNER JOIN articles')
+    end
+
+    it 'joins table with alias' do
+      sql = immutable(query) do
+        query.join(:articles, :a)
+      end
+
+      expect(sql.to_s).to eq('SELECT * FROM foo INNER JOIN articles a')
+    end
+
+    it 'joins table with ON' do
+      sql = immutable(query) do
+        query.join(:articles, :a).on('foo = bar').where(one: 1)
+      end
+
+      expect(sql.to_s).to eq('SELECT * FROM foo INNER JOIN articles a ON foo = bar WHERE one = 1')
+    end
+
+    it 'raises error when last item was not a Join' do
+      expect { query.on('foo') }.to raise_error(
+        Koine::SqlBuilder::Joins::Error,
+        'ON can only be performed after a join'
+      )
+    end
+  end
 end

@@ -3,11 +3,12 @@
 module Koine
   module SqlBuilder
     class SelectBuilder
-      def initialize(from:, select:, where:, adapter:)
+      def initialize(from:, select:, where:, joins:, adapter:)
         @adapter = adapter
         @attributes = {
           select: select,
           from: from,
+          joins: joins,
           where: where,
         }
       end
@@ -22,6 +23,16 @@ module Koine
 
       def where(conditions = {})
         create(:where, @attributes[:where].with_added_conditions(conditions))
+      end
+
+      def join(table_name, table_alias = nil)
+        join = Join.new(table_name, table_alias, adapter: @adapter)
+
+        create(:joins, @attributes[:joins].join(join))
+      end
+
+      def on(config)
+        create(:joins, @attributes[:joins].on(config))
       end
 
       def to_s
