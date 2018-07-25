@@ -5,27 +5,27 @@ module Koine
     class Where
       include Enumerable
 
-      def initialize(conditions = [], adapter:)
+      def initialize(items = [], adapter:)
         @adapter = adapter
-        @conditions = conditions
+        @items = items
       end
 
-      def with_added_conditions(conditions = {})
-        conditions = Array(conditions).map do |condition|
-          @adapter.create_condition(condition)
+      def with_added_conditions(items = {})
+        items = Array(items).map do |item|
+          @adapter.create_condition(item)
         end
 
-        conditions = [@conditions, conditions].flatten
-        self.class.new(conditions, adapter: @adapter)
+        items = [@items, items].flatten
+        self.class.new(items, adapter: @adapter)
       end
 
       def each(&block)
-        @conditions.each(&block)
+        @items.each(&block)
       end
 
       def to_s
-        unless conditions.empty?
-          return "WHERE #{conditions.join(' AND ')}"
+        unless items.empty?
+          return "WHERE #{items.join(' AND ')}"
         end
 
         ''
@@ -33,7 +33,7 @@ module Koine
 
       private
 
-      attr_reader :conditions
+      attr_reader :items
     end
   end
 end
