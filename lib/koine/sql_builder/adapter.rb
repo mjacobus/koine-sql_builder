@@ -3,6 +3,8 @@
 module Koine
   module SqlBuilder
     class Adapter
+      ArgumentError = Class.new(::ArgumentError)
+
       INTEGER_REGEXP = /^\d+$/
 
       def joiner
@@ -20,11 +22,15 @@ module Koine
           return condition_from_array(item)
         end
 
+        if item.is_a?(Condition)
+          return item
+        end
+
         raise "oops #{item.class}"
       end
 
-      def equal(key, value)
-        "#{key} = #{quote(value)}"
+      def equal(field, value)
+        Conditions::Equality.new(field, value, adapter: self)
       end
 
       def quote(value)
@@ -39,7 +45,7 @@ module Koine
 
       def condition_from_array(array)
         if array.length != 2
-          raise 'wrong number'
+          raise ArgumentError, 'Invalid argument'
         end
 
         equal(array.first, array.last)

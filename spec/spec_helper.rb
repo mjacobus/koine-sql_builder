@@ -13,6 +13,9 @@ end
 
 require 'bundler/setup'
 require 'koine/sql_builder'
+require 'object_comparator/rspec'
+
+require_relative './support/spec_helpers'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -21,23 +24,9 @@ RSpec.configure do |config|
   # Disable RSpec exposing methods globally on `Module` and `main`
   config.disable_monkey_patching!
   config.order = :random
+  config.include MySpecHelpers
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
-end
-
-def immutable(object)
-  yield(object).tap do |returned|
-    expect(returned).to(
-      be_a(object.class),
-      "#{returned.class} should have been a #{object.class}"
-    )
-
-    expect(returned).not_to(be(object), "#{object.class} should not have been muttated")
-  end
-end
-
-def as_string(*args)
-  described_class.new(*args).to_s
 end
