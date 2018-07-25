@@ -24,7 +24,7 @@ module Koine
       end
 
       def equal(field, value)
-        Conditions::Equality.new(field, value, adapter: self)
+        Conditions::Equal.new(field, value, adapter: self)
       end
 
       def quote(value)

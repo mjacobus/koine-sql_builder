@@ -9,7 +9,7 @@ require 'koine/sql_builder/where_bag'
 require 'koine/sql_builder/adapter'
 require 'koine/sql_builder/condition'
 require 'koine/sql_builder/conditions/comparison'
-require 'koine/sql_builder/conditions/equality'
+require 'koine/sql_builder/conditions/equal'
 
 module Koine
   module SqlBuilder

@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Koine::SqlBuilder::Conditions::Equality do
+RSpec.describe Koine::SqlBuilder::Conditions::Equal do
   let(:field) { 'name' }
   let(:value) { 'value' }
   let(:condition) { described_class.new(field, value, adapter: adapter).to_s }

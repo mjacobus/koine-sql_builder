@@ -3,7 +3,7 @@
 module Koine
   module SqlBuilder
     module Conditions
-      class Equality < Comparison
+      class Equal < Comparison
         def to_s
           if nil?
             return "#{field} IS NULL"

@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe Koine::SqlBuilder::Adapter do
   let(:adapter) { subject }
   let(:sample_condition) do
-    Koine::SqlBuilder::Conditions::Equality.new(:foo, :bar, adapter: adapter)
+    Koine::SqlBuilder::Conditions::Equal.new(:foo, :bar, adapter: adapter)
   end
 
   it 'has correct space as a #joiner' do
