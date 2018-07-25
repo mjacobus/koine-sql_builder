@@ -7,7 +7,16 @@ module Koine
 
       def initialize(conditions = [], adapter:)
         @adapter = adapter
-        @conditions = adapter.build_conditions(Array(conditions).compact)
+        @conditions = conditions
+      end
+
+      def with_added_conditions(conditions = {})
+        conditions = Array(conditions).map do |condition|
+          @adapter.create_condition(condition)
+        end
+
+        conditions = [@conditions, conditions].flatten
+        self.class.new(conditions, adapter: @adapter)
       end
 
       def each(&block)

@@ -21,7 +21,7 @@ module Koine
       end
 
       def where(conditions = {})
-        create(:where, WhereBag.new(conditions, adapter: @adapter))
+        create(:where, @attributes[:where].with_added_conditions(conditions))
       end
 
       def to_s

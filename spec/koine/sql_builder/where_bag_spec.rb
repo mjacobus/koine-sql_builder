@@ -3,21 +3,22 @@
 require 'spec_helper'
 
 RSpec.describe Koine::SqlBuilder::WhereBag do
-  let(:adapter) { double(:adapter) }
+  let(:adapter) { Koine::SqlBuilder::Adapter.new }
 
-  subject(:bag) { described_class.new(['foo'], adapter: adapter) }
+  subject(:bag) { described_class.new([], adapter: adapter) }
 
-  before do
-    allow(adapter).to receive(:build_conditions) do |args|
-      ["#{args.first}-conditioned"]
+  describe '#with_added_conditions' do
+    it 'adds the conditions' do
+      conditions = immutable(bag) do |bag|
+        bag.with_added_conditions(foo: :bar)
+      end
+
+      conditions2 = immutable(conditions) do |bag|
+        bag.with_added_conditions(bar: 1)
+      end
+
+      expect(conditions.to_s).to eq('WHERE foo = "bar"')
+      expect(conditions2.to_s).to eq('WHERE foo = "bar" AND bar = 1')
     end
-  end
-
-  it '#maps' do
-    result = bag.map do |item|
-      "a-#{item}"
-    end
-
-    expect(result).to eq(['a-foo-conditioned'])
   end
 end

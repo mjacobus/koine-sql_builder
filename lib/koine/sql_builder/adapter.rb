@@ -15,6 +15,14 @@ module Koine
         end
       end
 
+      def create_condition(item)
+        if item.is_a?(Array)
+          return condition_from_array(item)
+        end
+
+        raise "oops #{item.class}"
+      end
+
       def equal(key, value)
         "#{key} = #{quote(value)}"
       end
@@ -25,6 +33,16 @@ module Koine
         end
 
         "\"#{value}\""
+      end
+
+      private
+
+      def condition_from_array(array)
+        if array.length != 2
+          raise 'wrong number'
+        end
+
+        equal(array.first, array.last)
       end
     end
   end
