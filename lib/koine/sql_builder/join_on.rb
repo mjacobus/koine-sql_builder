@@ -9,10 +9,6 @@ module Koine
       end
 
       def to_s
-        if @on.strip.empty?
-          return ''
-        end
-
         "ON #{@on}"
       end
     end
