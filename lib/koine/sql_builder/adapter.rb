@@ -11,12 +11,6 @@ module Koine
         "\s"
       end
 
-      def build_conditions(conditions)
-        conditions.map do |key, value|
-          equal(key, value)
-        end
-      end
-
       def create_condition(item)
         if item.is_a?(Array)
           return condition_from_array(item)

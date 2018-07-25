@@ -26,14 +26,6 @@ RSpec.describe Koine::SqlBuilder::Adapter do
     end
   end
 
-  describe '#build_conditions' do
-    it 'build conditions as hash' do
-      result = adapter.build_conditions(foo: 1, bar: :baz).map(&:to_s)
-
-      expect(result).to eq(['foo = 1', 'bar = "baz"'])
-    end
-  end
-
   describe '#equal' do
     it 'returns an equality condition' do
       condition = adapter.equal(:foo, :bar)
