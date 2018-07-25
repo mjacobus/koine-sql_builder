@@ -2,7 +2,7 @@
 
 module Koine
   module SqlBuilder
-    class WhereBag
+    class Where
       include Enumerable
 
       def initialize(conditions = [], adapter:)

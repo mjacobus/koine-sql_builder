@@ -14,7 +14,7 @@ module Koine
           adapter: adapter,
           select: Select.new(*args),
           from: From.new,
-          where: WhereBag.new(adapter: adapter)
+          where: Where.new(adapter: adapter)
         )
       end
     end

@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Koine::SqlBuilder::WhereBag do
+RSpec.describe Koine::SqlBuilder::Where do
   let(:adapter) { Koine::SqlBuilder::Adapter.new }
 
   subject(:bag) { described_class.new([], adapter: adapter) }
