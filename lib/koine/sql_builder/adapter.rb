@@ -3,20 +3,30 @@
 module Koine
   module SqlBuilder
     class Adapter
+      ArgumentError = Class.new(::ArgumentError)
+
       INTEGER_REGEXP = /^\d+$/
 
-      def joiner
-        "\s"
+      attr_reader :joiner
+
+      def initialize(joiner: "\s")
+        @joiner = joiner
       end
 
-      def build_conditions(conditions)
-        conditions.map do |key, value|
-          equal(key, value)
+      def create_condition(item)
+        if item.is_a?(Array)
+          return condition_from_array(item)
         end
+
+        if item.is_a?(Condition)
+          return item
+        end
+
+        raise ArgumentError, "Unrecognized condition #{item.inspect}"
       end
 
-      def equal(key, value)
-        "#{key} = #{quote(value)}"
+      def equal(field, value)
+        Conditions::Equal.new(field, value, adapter: self)
       end
 
       def quote(value)
@@ -25,6 +35,16 @@ module Koine
         end
 
         "\"#{value}\""
+      end
+
+      private
+
+      def condition_from_array(array)
+        if array.length != 2
+          raise ArgumentError, 'Invalid argument'
+        end
+
+        equal(array.first, array.last)
       end
     end
   end

@@ -3,19 +3,19 @@
 module Koine
   module SqlBuilder
     class Builder
+      attr_reader :adapter
+
+      def initialize(adapter: Adapter.new)
+        @adapter = adapter
+      end
+
       def select(*args)
         SelectBuilder.new(
           adapter: adapter,
           select: Select.new(*args),
           from: From.new,
-          where: WhereBag.new(adapter: adapter)
+          where: Where.new(adapter: adapter)
         )
-      end
-
-      private
-
-      def adapter
-        @adapter ||= Adapter.new
       end
     end
   end
