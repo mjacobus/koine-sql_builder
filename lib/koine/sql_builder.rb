@@ -10,6 +10,7 @@ require 'koine/sql_builder/adapter'
 require 'koine/sql_builder/condition'
 require 'koine/sql_builder/conditions/comparison'
 require 'koine/sql_builder/conditions/equal'
+require 'koine/sql_builder/conditions/not_equal'
 
 module Koine
   module SqlBuilder
