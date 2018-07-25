@@ -10,6 +10,10 @@ examples.add do |builder|
     .from(users: :u)
     .where(lastname: 'Jacobus')
     .where(age: 18)
+
+  # SELECT *
+  # FROM users u
+  # WHERE lastname = "Jacobus" AND age = 18
 end
 
 examples.add do |builder|
@@ -17,6 +21,10 @@ examples.add do |builder|
     .select(:id, last_name: :lastname)
     .from(:users)
     .where(lastname: 'Jacobus')
+
+  # SELECT id, last_name AS lastname
+  # FROM users
+  # WHERE lastname = "Jacobus"
 end
 
 examples.add do |builder|
@@ -24,6 +32,10 @@ examples.add do |builder|
     .select
     .from(:users)
     .where(age: nil)
+
+  # SELECT *
+  # FROM users
+  # WHERE age IS NULL
 end
 
 examples.add do |builder|
@@ -33,6 +45,10 @@ examples.add do |builder|
     .select
     .from(:users)
     .where(age_not_null)
+
+  # SELECT *
+  # FROM users
+  # WHERE age IS NOT NULL
 end
 
 puts examples.to_a.join("\n\n")

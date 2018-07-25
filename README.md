@@ -27,9 +27,48 @@ Or install it yourself as:
 
 ## Usage
 
+See  [examples](https://github.com/mjacobus/koine-sql_builder/tree/master/examples)
 
 ```ruby
-# TODO
+builder = Koine::SqlBuilder::Builder.new
+
+builder.select
+  .from(users: :u)
+  .where(lastname: 'Jacobus')
+  .where(age: 18)
+
+# SELECT *
+# FROM users u
+# WHERE lastname = "Jacobus" AND age = 18
+
+builder
+  .select(:id, last_name: :lastname)
+  .from(:users)
+  .where(lastname: 'Jacobus')
+
+# SELECT id, last_name AS lastname
+# FROM users
+# WHERE lastname = "Jacobus"
+
+builder
+  .select
+  .from(:users)
+  .where(age: nil)
+
+# SELECT *
+# FROM users
+# WHERE age IS NULL
+
+age_not_null = builder.adapter.equal(:age, nil).not
+
+builder
+  .select
+  .from(:users)
+  .where(age_not_null)
+
+# SELECT *
+# FROM users
+# WHERE age IS NOT NULL
 ```
 
 ## Development
