@@ -6,8 +6,9 @@ module Koine
       include Enumerable
 
       def initialize(items = [], adapter:)
-        @adapter = adapter
-        @items = items
+        @adapter = adapter.freeze
+        @items = items.dup.freeze
+        freeze
       end
 
       def with_added_conditions(items = {})

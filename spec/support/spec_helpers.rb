@@ -9,6 +9,8 @@ module MySpecHelpers
       )
 
       expect(returned).not_to(be(object), "#{object.class} should not have been muttated")
+      expect(object).to(be_frozen, 'Object should  have been frozen')
+      expect(returned).to(be_frozen, 'returned should  have been frozen')
     end
   end
 

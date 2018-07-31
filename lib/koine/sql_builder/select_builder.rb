@@ -4,13 +4,14 @@ module Koine
   module SqlBuilder
     class SelectBuilder
       def initialize(from:, select:, where:, joins:, adapter:)
-        @adapter = adapter
+        @adapter = adapter.freeze
         @attributes = {
-          select: select,
-          from: from,
-          joins: joins,
-          where: where,
+          select: select.freeze,
+          from: from.freeze,
+          joins: joins.freeze,
+          where: where.freeze,
         }
+        freeze
       end
 
       def select(select = nil)

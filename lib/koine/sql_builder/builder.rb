@@ -6,7 +6,8 @@ module Koine
       attr_reader :adapter
 
       def initialize(adapter: Adapter.new)
-        @adapter = adapter
+        @adapter = adapter.freeze
+        freeze
       end
 
       def select(*args)
