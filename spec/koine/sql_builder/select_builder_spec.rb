@@ -54,6 +54,19 @@ RSpec.describe Koine::SqlBuilder::SelectBuilder do
 
       expect(sql).to eq('SELECT foo FROM bar WHERE foo IS NOT NULL')
     end
+
+    it 'takes literal' do
+      value = adapter.to_literal(':value')
+
+      query = builder
+        .select("*")
+        .from(:users)
+        .where(user_id: value)
+
+      expected = 'SELECT * FROM users WHERE user_id = :value'
+
+      expect(query.to_s).to eq(expected)
+    end
   end
 
   # join(:users, :u).on(u: :id, other: :user_id)

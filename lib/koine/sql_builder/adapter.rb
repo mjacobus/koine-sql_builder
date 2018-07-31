@@ -30,6 +30,20 @@ module Koine
         Conditions::Equal.new(field, value, adapter: self)
       end
 
+      def to_input_value(value)
+        klass = Koine::SqlBuilder::InputValues::InputValue
+
+        if value.is_a?(klass)
+          return value
+        end
+
+        klass.new(value, adapter: self)
+      end
+
+      def to_literal(value)
+        Koine::SqlBuilder::InputValues::Literal.new(value, adapter: self)
+      end
+
       def quote(value)
         if INTEGER_REGEXP.match?(value.to_s)
           return value.to_s

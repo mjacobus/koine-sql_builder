@@ -65,4 +65,24 @@ RSpec.describe Koine::SqlBuilder::Adapter do
       expect(condition).to be(sample_condition)
     end
   end
+
+  describe '#to_input_value' do
+    let(:input_value) do
+      Koine::SqlBuilder::InputValues::Literal.new('foo', adapter: adapter)
+    end
+
+    it 'returns the value itself when it is an InputValue' do
+      value = adapter.to_input_value(input_value)
+
+      expect(value).to be(input_value)
+    end
+
+    it 'returns the value itself when it is an InputValue' do
+      value = adapter.to_input_value(input_value.to_s)
+
+      expected = Koine::SqlBuilder::InputValues::InputValue.new('foo', adapter: adapter)
+
+      expect(value).to be_equal_to(expected)
+    end
+  end
 end

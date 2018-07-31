@@ -9,7 +9,9 @@ module Koine
             return "#{field} IS NULL"
           end
 
-          "#{field} = #{adapter.quote(value)}"
+          input = @adapter.to_input_value(value)
+
+          "#{field} = #{input}"
         end
       end
     end
