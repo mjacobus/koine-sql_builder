@@ -2,6 +2,8 @@
 
 require 'koine/sql_builder/version'
 require 'koine/sql_builder/builder'
+require 'koine/sql_builder/input_values/input_value'
+require 'koine/sql_builder/input_values/literal'
 require 'koine/sql_builder/select_builder'
 require 'koine/sql_builder/select'
 require 'koine/sql_builder/from'

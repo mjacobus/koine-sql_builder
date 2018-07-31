@@ -90,6 +90,17 @@ builder
 # SELECT *
 # FROM users
 # INNER JOIN articles a ON users.id = a.user_id
+
+value = builder.adapter.to_literal(':value')
+
+builder
+  .select
+  .from(:users)
+  .where(user_id: value)
+
+# SELECT *
+# FROM users
+# WHERE user_id = :value
 ```
 
 ## Development

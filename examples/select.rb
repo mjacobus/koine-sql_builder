@@ -73,6 +73,19 @@ examples.add do |builder|
   # INNER JOIN articles a ON users.id = a.user_id
 end
 
+examples.add do |builder|
+  value = builder.adapter.to_literal(':value')
+
+  builder
+    .select
+    .from(:users)
+    .where(user_id: value)
+
+  # SELECT *
+  # FROM users
+  # WHERE user_id = :value
+end
+
 puts
 puts
 puts examples.to_a.join("\n\n")
