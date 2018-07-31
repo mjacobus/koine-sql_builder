@@ -10,7 +10,8 @@ module Koine
       attr_reader :joiner
 
       def initialize(joiner: "\s")
-        @joiner = joiner
+        @joiner = joiner.freeze
+        freeze
       end
 
       def create_condition(item)

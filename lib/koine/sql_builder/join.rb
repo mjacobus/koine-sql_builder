@@ -4,10 +4,11 @@ module Koine
   module SqlBuilder
     class Join
       def initialize(table_name, table_alias = nil, type: 'INNER', adapter:)
-        @table_name = table_name
-        @table_alias = table_alias || table_name
-        @type = type
-        @adapter = adapter
+        @table_name = table_name.freeze
+        @table_alias = (table_alias || table_name).freeze
+        @type = type.freeze
+        @adapter = adapter.freeze
+        freeze
       end
 
       def to_s

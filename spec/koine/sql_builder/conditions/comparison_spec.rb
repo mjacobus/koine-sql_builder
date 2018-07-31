@@ -37,8 +37,14 @@ RSpec.describe Koine::SqlBuilder::Conditions::Comparison do
     end
 
     describe 'when class negation does not exist' do
-      before do
-        allow(comparison).to receive(:class).and_return('Foo')
+      let(:comparison) do
+        klass = Class.new(Koine::SqlBuilder::Conditions::Equal) do
+          def class
+            'Foo'
+          end
+        end
+
+        klass.new(:foo, :bar, adapter: adapter)
       end
 
       it 'raises error' do

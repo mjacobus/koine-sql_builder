@@ -5,9 +5,10 @@ module Koine
     module Conditions
       class Comparison < Condition
         def initialize(field, value, adapter:)
-          @adapter = adapter
-          @field = field.dup
-          @value = value.dup
+          @adapter = adapter.freeze
+          @field = field.dup.freeze
+          @value = value.dup.freeze
+          freeze
         end
 
         def not

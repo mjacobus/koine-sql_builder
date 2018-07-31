@@ -10,7 +10,8 @@ module Koine
           end.join(', ')
         end
 
-        @as_string = config.to_s
+        @as_string = config.to_s.freeze
+        freeze
       end
 
       def to_s
